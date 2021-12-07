@@ -7,10 +7,13 @@
         <h3 class="card-title">
           <%= @article.title %>
         </h3>
-        <%= @article.user.email %>
-        <%= l(@article.created_at, format: :long) %>
-        <%= link_to I18n.t('views.button.edit'), edit_article_path(@article) %>
-        <%= link_to I18n.t('views.button.delete'), article_path(@article), method: :delete %>
+          <%= @article.user.email %>
+          <%= l(@article.created_at, format: :long) %>
+          <% if current_user.id == @article.user.id %>
+            <%= link_to I18n.t('views.button.edit'), edit_article_path(@article.id) %>
+            <%= link_to I18n.t('views.button.delete'), article_path(@article.id), method: :delete %>
+          <% end %>
+
       </div>
       <!-- /.card-header -->
       <div class="card-body">
