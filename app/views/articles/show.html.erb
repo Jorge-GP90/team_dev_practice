@@ -20,17 +20,10 @@
       </div>
       <p><%= I18n.t('views.messages.comment_list') %></p>
       <div id="comments_area" class="comments_area_form">
-
         <%= render partial: 'comments/index', locals: { comments: @comments, article: @article } %>
       </div>
-
       <p><%= I18n.t('views.messages.post_comment') %></p>
-
       <%= render partial: 'comments/form', locals: { comment: @comment, article: @article } %>
-
-      <!-- /.card-body -->
     </div>
-    <!-- /.card -->
   </div>
-  <!-- ./col -->
 </div>
