@@ -15,4 +15,9 @@ class Team < ApplicationRecord
   def invite_member(user)
     assigns.create(user: user)
   end
+  
+  def owner?(user)
+    return self.owner_id == user.id
+  end
+
 end

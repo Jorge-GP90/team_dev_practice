@@ -42,9 +42,6 @@
                       <td><%= image_tag 'default.jpg', size: '40x40' %></td>
                       <td><%= assign.user.email %></td>
                       <td><%= link_to I18n.t('views.button.delete'), team_assign_path(@team, assign), method: :delete, class: 'btn btn-sm btn-danger' %></td>
-                    　<% if @team.owner?(current_user) && assign.user_id != current_user.id %>
-                        <td><%= button_to I18n.t('views.button.empowerment'), { controller: 'teams', action: 'change_owner'}, { method: :patch, params: {team: {owner_id: assign.user.id} }, class: 'btn btn-sm btn-dark'} %></td>
-                      <% end %>
                     </tr>
                   <% end %>
                 </tbody>

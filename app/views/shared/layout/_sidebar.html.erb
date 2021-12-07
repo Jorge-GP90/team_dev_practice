@@ -38,7 +38,7 @@
               </p>
               <% if @working_team.owner_id == current_user.id || agenda.user == current_user %>
                 <object>
-                  <%= link_to 'delete', agenda_path(agenda.id), method: :delete, class: 'btn btn-sm btn-danger' %>
+                  <%= link_to 'delete', agenda_url(agenda.id), method: :delete, class: 'btn btn-sm btn-danger' %>
                 </object>
               <% end %>
             </a>
