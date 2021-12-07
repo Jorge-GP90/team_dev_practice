@@ -7,27 +7,23 @@
         <h3 class="card-title">
           <%= @article.title %>
         </h3>
-        <%= @article.user.email %>
-        <%= l(@article.created_at, format: :long) %>
-        <%= link_to I18n.t('views.button.edit'), edit_article_path(@article) %>
-        <%= link_to I18n.t('views.button.delete'), article_path(@article), method: :delete %>
+          <%= @article.user.email %>
+          <%= l(@article.created_at, format: :long) %>
+          <% if current_user.id == @article.user.id %>
+            <%= link_to I18n.t('views.button.edit'), edit_article_path(@article.id) %>
+            <%= link_to I18n.t('views.button.delete'), article_path(@article.id), method: :delete %>
+          <% end %>
       </div>
-
       <div class="card-body">
         <%= markdown(@article.content).html_safe %>
         <%= image_tag @article.image_url if @article.image_url %>
       </div>
-
       <p><%= I18n.t('views.messages.comment_list') %></p>
       <div id="comments_area" class="comments_area_form">
-
         <%= render partial: 'comments/index', locals: { comments: @comments, article: @article } %>
       </div>
-
       <p><%= I18n.t('views.messages.post_comment') %></p>
-
       <%= render partial: 'comments/form', locals: { comment: @comment, article: @article } %>
-
     </div>
   </div>
 </div>

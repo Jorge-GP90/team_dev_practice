@@ -71,5 +71,5 @@ class TeamsController < ApplicationController
   def edit_only_owner
     redirect_to @team, notice: I18n.t('views.messages.cannot_edit_non_leaders') unless @team.owner?(current_user)
   end
-  
+
 end
