@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: %i[show edit update destroy]
-
+  before_action :set_team, only: %i[show edit update destroy change_owner]
+  before_action :edit_only_owner, only: %i[edit]
 
   def index
     @teams = Team.all
@@ -49,6 +49,15 @@ class TeamsController < ApplicationController
     @team = current_user.keep_team_id ? Team.find(current_user.keep_team_id) : current_user.teams.first
   end
   
+  def change_owner
+    if @team.update(team_params)
+      AssignMailer.change_owner_mail(@team).deliver
+      redirect_to @team, notice: I18n.t('views.messages.chage_leader')
+    else
+      render :edit
+    end
+  end
+
   private
 
   def set_team
@@ -57,6 +66,10 @@ class TeamsController < ApplicationController
 
   def team_params
     params.fetch(:team, {}).permit %i[name icon icon_cache owner_id keep_team_id]
+  end
+  
+  def edit_only_owner
+    redirect_to @team, notice: I18n.t('views.messages.cannot_edit_non_leaders') unless @team.owner?(current_user)
   end
 
 end

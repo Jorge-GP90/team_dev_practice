@@ -18,4 +18,5 @@ class AssignMailer < ApplicationMailer
     @agenda = agenda
     mail to: @email, subject: I18n.t('views.messages.delete_agenda')
   end
+  
 end
